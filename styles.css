@@ -9,15 +9,14 @@ body, html, section, main, div, aside, p {
   font-family: 'Open Sans', sans-serif;
 }
 
-main {
-  height: 100%;
-  width: 100%;
-  position: relative;
-  background-image: url('assets/camper-bkgrd.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 }
+
+.image {
+  height: 100px;
+  width: 1000px;
+}
+
+
 
 .input-sect {
   width: 100%;
@@ -28,7 +27,19 @@ main {
 }
 
 input, button:focus {
-  outline: none
+  outline: none;
+}
+
+.input {
+  height: 50px;
+  width: 300px;
+
+
+}
+
+.save-btn {
+  height: 50px;
+  width: 150px;
 }
 
 
