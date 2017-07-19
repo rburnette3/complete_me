@@ -42,6 +42,7 @@ suggest(word) {
     let currNode = this.root;
     let suggestionArray = [];
 
+    // find suggest root node
     for (let i = 0; i < wordAsArray.length; i++) {
       currNode = currNode.children[wordAsArray[i]]
       //console.log('CURR NODE:', currNode);
@@ -49,20 +50,30 @@ suggest(word) {
 
     // currNode now refers to the last leter in our word
     const traverseTheTrie = (word, currNode) => {
-      let keys = Object.keys(currNode.children);
-      for (let k = 0; k < keys.length; k++) {
-        // console.log('CURRENT NODE:', currNode, 'KEYS:', keys);
-        const child = currNode.children[keys[k]];
-        let newString = word + child.letter;
-        if (child.isWord) {
-          suggestionArray.push({name: newString, frequency: child.frequency, lastTouched: child.lastTouched});
+      let childLetters = Object.keys(currNode.children);
+
+      childLetters.forEach( letter => {
+        const childNode = currNode.children[letter];
+        let childNodeWord = word + letter;
+
+        if (childNode.isWord) {
+          suggestionArray.push({
+            name: childNodeWord,
+            frequency: childNode.frequency,
+            timeStamp: childNode.timeStamp
+          });
         }
-        traverseTheTrie(newString, child);
-      }
+        traverseTheTrie(childNodeWord, childNode);
+      } )
+
     };
 
     if (currNode && currNode.isWord) {
-      suggestionArray.push({name: word, frequency: currNode.frequency, lastTouched: currNode.lastTouched});
+      suggestionArray.push({
+        name: word,
+        frequency: currNode.frequency,
+        timeStamp: currNode.timeStamp
+      });
     }
 
     if (currNode) {
@@ -71,12 +82,10 @@ suggest(word) {
 
     console.log('suggestionArray:', suggestionArray);
     suggestionArray.sort((a, b) => {
-      return b.frequency - a.frequency || b.lastTouched - a.lastTouched
+      return b.frequency - a.frequency || b.timeStamp - a.timeStamp
     })
 
-    return suggestionArray.map((obj) => {
-      return obj.name;
-    })
+    return suggestionArray.map( obj => obj.name )
   }
 
 
@@ -90,7 +99,7 @@ suggest(word) {
 
   console.log(('CURR NODE:', currNode))
   currNode.frequency++
-  currNode.lastTouched = Date.now();
+  currNode.timeStamp = Date.now();
   }
 
   populate(dictionary) {
