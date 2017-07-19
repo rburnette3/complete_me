@@ -55,14 +55,14 @@ suggest(word) {
         const child = currNode.children[keys[k]];
         let newString = word + child.letter;
         if (child.isWord) {
-          suggestionArray.push({name: newString, frequency: child.frequency});
+          suggestionArray.push({name: newString, frequency: child.frequency, lastTouched: child.lastTouched});
         }
         traverseTheTrie(newString, child);
       }
     };
 
     if (currNode && currNode.isWord) {
-      suggestionArray.push({name: word, frequency: currNode.frequency})
+      suggestionArray.push({name: word, frequency: currNode.frequency, lastTouched: currNode.lastTouched});
     }
 
     if (currNode) {
@@ -71,7 +71,7 @@ suggest(word) {
 
     console.log('suggestionArray:', suggestionArray);
     suggestionArray.sort((a, b) => {
-      return b.frequency - a.frequency
+      return b.frequency - a.frequency || b.lastTouched - a.lastTouched
     })
 
     return suggestionArray.map((obj) => {
@@ -87,7 +87,10 @@ suggest(word) {
   for (let i = 0; i < wordsArray.length; i++) {
     currNode = currNode.children[wordsArray[i]]
   }
+
+  console.log(('CURR NODE:', currNode))
   currNode.frequency++
+  currNode.lastTouched = Date.now();
   }
 
   populate(dictionary) {
