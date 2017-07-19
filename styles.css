@@ -11,19 +11,31 @@ body, html, section, main, div, aside, p {
 
 }
 
-.image {
-  height: 100px;
-  width: 1000px;
+
+.img-container {
+  height: 100%;
+  width: 100%;
+  background-image: url("assets/camper-van.png");
 }
 
+.background-img {
+  height: 100vh;
+  width: 100%;
+}
 
+.heading1 {
+  top: 25px;
+  color: white;
+}
 
 .input-sect {
   width: 100%;
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 500px;
+  top: 350px;
+  left: 300px;
+
 }
 
 input, button:focus {
@@ -33,13 +45,18 @@ input, button:focus {
 .input {
   height: 50px;
   width: 300px;
+  opacity: 0.70;
+  border-radius: 10px;
 
 
 }
 
-.save-btn {
+.suggest-btn {
   height: 50px;
-  width: 150px;
+  width: 100px;
+  opacity: 0.70;
+  background-color: #FFF;
+  border-radius: 10px;
 }
 
 

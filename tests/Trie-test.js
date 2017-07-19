@@ -24,7 +24,7 @@ describe('Trie functionality', () => {
       expect(completeMe.root).to.be.instanceOf(Node)
     })
 
-    it.skip('should be able to insert a word and root should have children', () => {
+    it('should be able to insert a word and root should have children', () => {
       completeMe.insert('apple');
 
       expect(completeMe.root.children.a.letter).to.be.equal('a')
@@ -38,7 +38,8 @@ describe('Trie functionality', () => {
 
     })
 
-    it.skip('should be able to insert a word and the last letter should have a isWord property of true', () => {
+    it('should be able to insert a word and the last letter should have a isWord property of true', () => {
+      completeMe.insert('app');
       completeMe.insert('apple');
 
       expect(
@@ -60,9 +61,17 @@ describe('Trie functionality', () => {
         .children.e
         .isWord
       ).to.equal(true)
+
+      expect(
+        completeMe.root
+        .children.a
+        .children.p
+        .children.p
+        .isWord
+      ).to.equal(true)
     })
 
-    it.skip('should be able to insert multiple words and children objects should have multiple props', () => {
+    it('should be able to insert multiple words and children objects should have multiple props', () => {
       completeMe.insert('apple');
       completeMe.insert('ape');
 
@@ -77,7 +86,7 @@ describe('Trie functionality', () => {
 
     })
 
-    it.skip('should have nodes which represent incomplete words where the isWord prop is false', () => {
+    it('should have nodes which represent incomplete words where the isWord prop is false', () => {
       completeMe.insert('apple');
 
       expect(
@@ -93,9 +102,13 @@ describe('Trie functionality', () => {
   })
 
   describe('count', () => {
-    let completeMe = new Trie();
+    let completeMe
 
-    it.skip('should return number of words inserted', () => {
+    beforeEach(function () {
+      completeMe = new Trie();
+    })
+
+    it('should return number of words inserted', () => {
       expect(completeMe.count()).to.equal(0);
 
       completeMe.insert('ape');
@@ -111,7 +124,7 @@ describe('Trie functionality', () => {
       expect(completeMe.count()).to.equal(4);
     })
 
-    it.skip('should return number of words inserted', () => {
+    it('should return number of words inserted', () => {
       expect(completeMe.count()).to.equal(0);
 
       completeMe.insert('ape');
@@ -123,24 +136,61 @@ describe('Trie functionality', () => {
   });
 
   describe('suggest', () => {
-    let completeMe;
+     let completeMe;
 
-    beforeEach(function () {
-      completeMe = new Trie();
+     beforeEach(function () {
+       completeMe = new Trie();
+       completeMe.insert('app')
+       completeMe.insert('apple');
+       completeMe.insert('applesauce');
+       completeMe.insert('apply');
+       completeMe.insert('apt');
+       completeMe.insert('cat');
+       completeMe.insert('x-ray')
+     })
+
+     it('should return all children words of suggestion', () => {
+       let suggestions = completeMe.suggest('app');
+
+       expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
+     })
+
+     it('should return all children words of suggestion', () => {
+       let suggestions = completeMe.suggest('apple');
+
+       expect(suggestions).to.deep.equal(['apple', 'applesauce'])
+     })
+
+     it('should not return children words of suggestion', () => {
+       let suggestions = completeMe.suggest('applesauceb');
+
+       expect(suggestions).to.deep.equal([]);
+     })
+
+     it('should return children words of suggestion with dash in it', () => {
+       let suggestions = completeMe.suggest('x');
+
+       expect(suggestions).to.deep.equal(['x-ray']);
+     })
+   });
+
+   describe('dictionary populate', () => {
+       let completeMe;
+
+       beforeEach(function (done) {
+      this.timeout(10000)
+      setTimeout(done, 10000)
+      completeMe = new Trie()
+      completeMe.populate(dictionary)
     })
 
-    it.skip('should return all children words of suggestion', () => {
-      completeMe.insert('apple');
-      completeMe.insert('applesauce');
-      completeMe.insert('apply');
-      completeMe.insert('apt');
-      completeMe.insert('cat');
 
-      let suggestions = completeMe.suggest('app');
+       it('should have lots of words after dictionary is populated', () => {
+         expect(completeMe.wordCount).to.equal(234371);
+       })
+     })
 
-      expect(suggestions).to.deep.equal([ 'apple', 'applesauce', 'apply' ])
-    })
-  });
+
 
   describe('select', () => {
     let completeMe;
@@ -149,7 +199,7 @@ describe('Trie functionality', () => {
       completeMe = new Trie();
     })
 
-    it.skip('should be able to select order of words returned by suggest', () => {
+    it('should be able to select order of words returned by suggest', () => {
       completeMe.insert('app')
       completeMe.insert('apple')
       completeMe.insert('applesauce')
@@ -169,5 +219,4 @@ describe('Trie functionality', () => {
       expect(suggestions).to.deep.equal([ 'apple', 'apply', 'app', 'applesauce' ])
     })
   })
-
 })

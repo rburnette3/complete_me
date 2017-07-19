@@ -5,7 +5,7 @@ describe ('Node functionality', () => {
   let node;
 
   beforeEach(() => {
-    node = new Node('pizza')
+    node = new Node()
   })
 
   it('should be a thing', () => {
