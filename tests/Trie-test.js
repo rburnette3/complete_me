@@ -199,51 +199,36 @@ describe('Trie functionality', () => {
     })
 
     it('should be able to select order of words returned by suggest', () => {
-          completeMe.insert('app')
-          completeMe.insert('apple')
-          completeMe.insert('applesauce')
-          completeMe.insert('apply')
+      completeMe.insert('app')
+      completeMe.insert('apple')
+      completeMe.insert('applesauce')
+      completeMe.insert('apply')
 
-          let suggestions = completeMe.suggest('app');
+      let suggestions = completeMe.suggest('app');
 
-          expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
+      expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
 
-          completeMe.select('app');
-          suggestions = completeMe.suggest('app');
-          expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
+      completeMe.select('app');
+      suggestions = completeMe.suggest('app');
+      expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
 
-          completeMe.select('apply');
-          suggestions = completeMe.suggest('app');
-          expect(suggestions).to.deep.equal([ 'apply', 'app', 'apple', 'applesauce' ])
+      completeMe.select('apply');
+      suggestions = completeMe.suggest('app');
+      expect(suggestions).to.deep.equal([ 'apply', 'app', 'apple', 'applesauce' ])
 
-          completeMe.select('apple');
-          suggestions = completeMe.suggest('app');
-          expect(suggestions).to.deep.equal([ 'apple', 'apply', 'app', 'applesauce' ])
+      completeMe.select('apple');
+      suggestions = completeMe.suggest('app');
+      expect(suggestions).to.deep.equal([ 'apple', 'apply', 'app', 'applesauce' ])
 
-          completeMe.select('apple');
-          completeMe.select('apply');
-          suggestions = completeMe.suggest('app');
-          expect(suggestions).to.deep.equal([ 'apply', 'apple', 'app', 'applesauce' ])
-        })
-  //   it('should be able to select order of words returned by suggest', () => {
-  //     completeMe.insert('app')
-  //     completeMe.insert('apple')
-  //     completeMe.insert('applesauce')
-  //     completeMe.insert('apply')
-  //
-  //     let suggestions = completeMe.suggest('app');
-  //
-  //     expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
-  //
-  //     completeMe.select('ape');
-  //     expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
-  //
-  //     completeMe.select('apply');
-  //     expect(suggestions).to.deep.equal([ 'apply', 'app', 'apple', 'applesauce' ])
-  //
-  //     completeMe.select('apple');
-  //     expect(suggestions).to.deep.equal([ 'apple', 'apply', 'app', 'applesauce' ])
-  //   })
-  // })
+      completeMe.select('app');
+      suggestions = completeMe.suggest('app');
+      expect(suggestions).to.deep.equal([ 'app', 'apple', 'apply', 'applesauce' ])
+
+      completeMe.select('apply');
+      completeMe.select('app');
+      completeMe.select('apple');
+      suggestions = completeMe.suggest('app');
+      expect(suggestions).to.deep.equal([ 'app', 'apple', 'apply', 'applesauce' ])
+    })
 })
 })
