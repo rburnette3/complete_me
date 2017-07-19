@@ -40,7 +40,7 @@ count() {
 suggest(word) {
     let wordAsArray = [...word];
     let currNode = this.root;
-    let suggestionsArray = [];
+    let suggestionArray = [];
 
     for (let i = 0; i < wordAsArray.length; i++) {
       currNode = currNode.children[wordAsArray[i]]
@@ -55,28 +55,45 @@ suggest(word) {
         const child = currNode.children[keys[k]];
         let newString = word + child.letter;
         if (child.isWord) {
-          suggestionsArray.push(newString);
+          suggestionArray.push({name: newString, frequency: child.frequency});
         }
         traverseTheTrie(newString, child);
       }
     };
 
     if (currNode && currNode.isWord) {
-      suggestionsArray.push(word)
+      suggestionArray.push({name: word, frequency: currNode.frequency})
     }
 
     if (currNode) {
       traverseTheTrie(word, currNode);
     }
 
-    //console.log('suggestionsArray:', suggestionsArray);
-    return suggestionsArray;
+    console.log('suggestionArray:', suggestionArray);
+    suggestionArray.sort((a, b) => {
+      return b.frequency - a.frequency
+    })
+
+    return suggestionArray.map((obj) => {
+      return obj.name;
+    })
   }
+
+
+  select(word) {
+    let wordsArray = [...word];
+    let currNode = this.root;
+
+  for (let i = 0; i < wordsArray.length; i++) {
+    currNode = currNode.children[wordsArray[i]]
+  }
+  currNode.frequency++
+  }
+
   populate(dictionary) {
     dictionary.forEach(word => {
       this.insert(word);
     })
   }
-
 
 }

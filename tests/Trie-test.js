@@ -177,9 +177,8 @@ describe('Trie functionality', () => {
    describe('dictionary populate', () => {
        let completeMe;
 
-       beforeEach(function (done) {
-      this.timeout(10000)
-      setTimeout(done, 10000)
+       beforeEach(function(){
+      this.timeout(5000)
       completeMe = new Trie()
       completeMe.populate(dictionary)
     })
@@ -200,23 +199,51 @@ describe('Trie functionality', () => {
     })
 
     it('should be able to select order of words returned by suggest', () => {
-      completeMe.insert('app')
-      completeMe.insert('apple')
-      completeMe.insert('applesauce')
-      completeMe.insert('apply')
+          completeMe.insert('app')
+          completeMe.insert('apple')
+          completeMe.insert('applesauce')
+          completeMe.insert('apply')
 
-      let suggestions = completeMe.suggest('app');
+          let suggestions = completeMe.suggest('app');
 
-      expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
+          expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
 
-      completeMe.select('ape');
-      expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
+          completeMe.select('app');
+          suggestions = completeMe.suggest('app');
+          expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
 
-      completeMe.select('apply');
-      expect(suggestions).to.deep.equal([ 'apply', 'app', 'apple', 'applesauce' ])
+          completeMe.select('apply');
+          suggestions = completeMe.suggest('app');
+          expect(suggestions).to.deep.equal([ 'apply', 'app', 'apple', 'applesauce' ])
 
-      completeMe.select('apple');
-      expect(suggestions).to.deep.equal([ 'apple', 'apply', 'app', 'applesauce' ])
-    })
-  })
+          completeMe.select('apple');
+          suggestions = completeMe.suggest('app');
+          expect(suggestions).to.deep.equal([ 'apple', 'apply', 'app', 'applesauce' ])
+
+          completeMe.select('apple');
+          completeMe.select('apply');
+          suggestions = completeMe.suggest('app');
+          expect(suggestions).to.deep.equal([ 'apply', 'apple', 'app', 'applesauce' ])
+        })
+  //   it('should be able to select order of words returned by suggest', () => {
+  //     completeMe.insert('app')
+  //     completeMe.insert('apple')
+  //     completeMe.insert('applesauce')
+  //     completeMe.insert('apply')
+  //
+  //     let suggestions = completeMe.suggest('app');
+  //
+  //     expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
+  //
+  //     completeMe.select('ape');
+  //     expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
+  //
+  //     completeMe.select('apply');
+  //     expect(suggestions).to.deep.equal([ 'apply', 'app', 'apple', 'applesauce' ])
+  //
+  //     completeMe.select('apple');
+  //     expect(suggestions).to.deep.equal([ 'apple', 'apply', 'app', 'applesauce' ])
+  //   })
+  // })
+})
 })
