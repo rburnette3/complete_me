@@ -1,47 +1,41 @@
 import Node from './Node'
 import Trie from './Trie'
 import words from './words'
-// const $ = require('jquery')
+const $ = require('jquery')
 
 let searchTrie = new Trie();
 
-
-
 $(document).ready(populateDictionary)
-
 
 function populateDictionary() {
   searchTrie.populate(words)
-  console.log(searchTrie.count());
 }
 
-$('#wordinput').on('input', function(){
-  console.log('hi')
-  if($('#wordinput').val() === ''){
-    $('#append-sect').empty()
-  }else{
-    filterList();
-  }
-})
+function selectWord(event) {
+  let selected = event.target.innerHTML;
+
+  searchTrie.select(selected);
+  filterList()
+}
 
 function filterList () {
   let string = $('#wordinput').val().toLowerCase();
   let suggestions = searchTrie.suggest(string);
-  $('#append-sect').empty()
 
-  for(let i = 0; i < 15; i++){
-    if(suggestions[i] !== undefined) {
+  $('#append-sect').empty()
+  for (let i = 0; i < 15; i++) {
+    if (suggestions[i] !== undefined) {
       $('.append-sect').append(`<ul id='list-item'>${suggestions[i]}</ul>`)
     }
   }
 }
 
-$('.append-sect').on('click','#list-item', selectWord)
+$('#wordinput').on('input', function() {
+  if ($('#wordinput').val() === '') {
+    $('#append-sect').empty()
+  } else {
+    filterList();
+  }
+})
 
-function selectWord(event) {
-  console.log(event.target);
-  console.log('[',event.target.innerHTML,']');
-  let selected = event.target.innerHTML;
-  searchTrie.select(selected);
-  filterList()
-}
+$('.append-sect').on('click', '#list-item', selectWord)

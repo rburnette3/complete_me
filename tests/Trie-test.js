@@ -136,58 +136,58 @@ describe('Trie functionality', () => {
   });
 
   describe('suggest', () => {
-     let completeMe;
+    let completeMe;
 
-     beforeEach(function () {
-       completeMe = new Trie();
-       completeMe.insert('app')
-       completeMe.insert('apple');
-       completeMe.insert('applesauce');
-       completeMe.insert('apply');
-       completeMe.insert('apt');
-       completeMe.insert('cat');
-       completeMe.insert('x-ray')
-     })
+    beforeEach(function () {
+      completeMe = new Trie();
+      completeMe.insert('app')
+      completeMe.insert('apple');
+      completeMe.insert('applesauce');
+      completeMe.insert('apply');
+      completeMe.insert('apt');
+      completeMe.insert('cat');
+      completeMe.insert('x-ray')
+    })
 
-     it('should return all children words of suggestion', () => {
-       let suggestions = completeMe.suggest('app');
+    it ('should return all children words of suggestion', () => {
+      let suggestions = completeMe.suggest('app');
 
-       expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
-     })
+      expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
+    })
 
-     it('should return all children words of suggestion', () => {
-       let suggestions = completeMe.suggest('apple');
+    it('should return all children words of suggestion', () => {
+      let suggestions = completeMe.suggest('apple');
 
-       expect(suggestions).to.deep.equal(['apple', 'applesauce'])
-     })
+      expect(suggestions).to.deep.equal(['apple', 'applesauce'])
+    })
 
-     it('should not return children words of suggestion', () => {
-       let suggestions = completeMe.suggest('applesauceb');
+    it('should not return children words of suggestion', () => {
+      let suggestions = completeMe.suggest('applesauceb');
 
-       expect(suggestions).to.deep.equal([]);
-     })
+      expect(suggestions).to.deep.equal([]);
+    })
 
-     it('should return children words of suggestion with dash in it', () => {
-       let suggestions = completeMe.suggest('x');
+    it('should return children words of suggestion with dash in it', () => {
+      let suggestions = completeMe.suggest('x');
 
-       expect(suggestions).to.deep.equal(['x-ray']);
-     })
-   });
+      expect(suggestions).to.deep.equal(['x-ray']);
+    })
+  });
 
-   describe('dictionary populate', () => {
-       let completeMe;
+  describe('dictionary populate', () => {
+    let completeMe;
 
-       beforeEach(function(){
+    beforeEach(function() {
       this.timeout(5000)
       completeMe = new Trie()
       completeMe.populate(dictionary)
     })
 
 
-       it('should have lots of words after dictionary is populated', () => {
-         expect(completeMe.wordCount).to.equal(234371);
-       })
-     })
+    it('should have lots of words after dictionary is populated', () => {
+      expect(completeMe.wordCount).to.equal(234371);
+    })
+  })
 
 
 
@@ -230,5 +230,5 @@ describe('Trie functionality', () => {
       suggestions = completeMe.suggest('app');
       expect(suggestions).to.deep.equal([ 'app', 'apple', 'apply', 'applesauce' ])
     })
-})
+  })
 })
