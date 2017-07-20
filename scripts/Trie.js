@@ -23,32 +23,26 @@ export default class Trie {
       }
       currentNode = currentNode.children[letter];
     })
-      if(!currentNode.isWord){
+    if (!currentNode.isWord) {
       this.wordCount ++;
       currentNode.value = word;
       currentNode.isWord = true;
-      }
-
-    
-
+    }
   }
 
+  count() {
+    return this.wordCount;
+  }
 
-count() {
-  return this.wordCount;
-}
-suggest(word) {
+  suggest(word) {
     let wordAsArray = [...word];
     let currNode = this.root;
     let suggestionArray = [];
 
-    // find suggest root node
     for (let i = 0; i < wordAsArray.length; i++) {
       currNode = currNode.children[wordAsArray[i]]
-      //console.log('CURR NODE:', currNode);
     }
 
-    // currNode now refers to the last leter in our word
     const traverseTheTrie = (word, currNode) => {
       let childLetters = Object.keys(currNode.children);
 
@@ -80,7 +74,6 @@ suggest(word) {
       traverseTheTrie(word, currNode);
     }
 
-    console.log('suggestionArray:', suggestionArray);
     suggestionArray.sort((a, b) => {
       return b.frequency - a.frequency || b.timeStamp - a.timeStamp
     })
@@ -88,18 +81,16 @@ suggest(word) {
     return suggestionArray.map( obj => obj.name )
   }
 
-
   select(word) {
     let wordsArray = [...word];
     let currNode = this.root;
 
-  for (let i = 0; i < wordsArray.length; i++) {
-    currNode = currNode.children[wordsArray[i]]
-  }
+    for (let i = 0; i < wordsArray.length; i++) {
+      currNode = currNode.children[wordsArray[i]]
+    }
 
-  console.log(('CURR NODE:', currNode))
-  currNode.frequency++
-  currNode.timeStamp = Date.now();
+    currNode.frequency++
+    currNode.timeStamp = Date.now();
   }
 
   populate(dictionary) {
@@ -107,5 +98,4 @@ suggest(word) {
       this.insert(word);
     })
   }
-
 }
