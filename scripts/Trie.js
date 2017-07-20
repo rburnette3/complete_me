@@ -29,7 +29,7 @@ export default class Trie {
       currentNode.isWord = true;
       }
 
-      // console.log(JSON.stringify(this.root, null, 4));
+    
 
   }
 
