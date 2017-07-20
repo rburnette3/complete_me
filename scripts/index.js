@@ -29,9 +29,9 @@ function filterList () {
   let suggestions = searchTrie.suggest(string);
   $('#append-sect').empty()
 
-  for(let i = 0; i < 10; i++){
+  for(let i = 0; i < 15; i++){
     if(suggestions[i] !== undefined) {
-      $('.append-sect').append(`<li id='list-item'>${suggestions[i]}</li>`)
+      $('.append-sect').append(`<ul id='list-item'>${suggestions[i]}</ul>`)
     }
   }
 }

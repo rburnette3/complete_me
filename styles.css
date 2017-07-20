@@ -51,7 +51,6 @@ span {
   position: absolute;
   top: 350px;
   left: 300px;
-
 }
 
 input, button:focus {
@@ -80,62 +79,21 @@ input, button:focus {
 }
 
 .append-sect {
-  height: 200px;
-  width: 200px;
+  height: 350px;
+  width: 300px;
   background-color: #FFF;
   position: absolute;
-  top: 50px;
-  left: 50px;
+  top: 60px;
+  left: 440px;
+  border-radius: 10px;
+  opacity: 0.70;
 }
 
-
-
-/*.dropdown-container {
-  height: 100px;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 20px;
-  padding-top: 15px
-}
-
-.dropdown .drop-button {
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  color: #008BA5;
-  background-color: inherit;
-}
-
-.drop-button {
+ul {
+  text-align:justify;
   text-decoration: none;
-  text-transform: uppercase;
-  border-style: none;
-  border: none;
-  outline: none;
 }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #008BA5;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+ul:hover {
+  background-color: #CC3F35
 }
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}*/
