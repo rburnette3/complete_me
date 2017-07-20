@@ -25,7 +25,6 @@ export default class Trie {
     })
     if (!currentNode.isWord) {
       this.wordCount ++;
-      currentNode.value = word;
       currentNode.isWord = true;
     }
   }

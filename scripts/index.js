@@ -23,19 +23,32 @@ function filterList () {
   let suggestions = searchTrie.suggest(string);
 
   $('#append-sect').empty()
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 10; i++) {
     if (suggestions[i] !== undefined) {
-      $('.append-sect').append(`<ul id='list-item'>${suggestions[i]}</ul>`)
+      $('.append-sect').append(`<section id='append-sect'><ul id='list-item'>${suggestions[i]}</ul><section>`)
+
     }
   }
 }
 
+function clearInput () {
+  $('#append-sect').empty()
+  $('#wordinput').val('');
+}
+
 $('#wordinput').on('input', function() {
   if ($('#wordinput').val() === '') {
-    $('#append-sect').empty()
+    $('#append-sect').empty();
+    $('.append-sect').toggleClass('append-sect-on')
   } else {
     filterList();
+    // $('.append-sect').toggleClass('append-sect-on')
+
   }
 })
 
 $('.append-sect').on('click', '#list-item', selectWord)
+
+$('#clear-btn').on('click', function() {
+  clearInput()
+})

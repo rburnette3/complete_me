@@ -22,22 +22,22 @@ body, html, section, main, div, aside, p {
 }
 
 .heading-container {
-  position: absolute;
   left: 75px;
   margin: 0;
+  position: absolute;
   top: 50px;
 }
 
 .heading {
-  display: inline-block;
   color: #FFF;
+  display: inline-block;
   font-size: 36px;
   margin: 0;
 }
 
 span {
+  color: #FFF;
   display: inline-block;
-  color:  #FFF;
   font-family: 'Pacifico', cursive;
   font-size: 72px;
   margin: 0;
@@ -45,12 +45,12 @@ span {
 }
 
 .input-sect {
-  width: 100%;
   display: flex;
   justify-content: center;
+  left: 300px;
   position: absolute;
   top: 350px;
-  left: 300px;
+  width: 100%;
 }
 
 input, button:focus {
@@ -58,36 +58,36 @@ input, button:focus {
 }
 
 .input {
-  height: 50px;
-  width: 300px;
-  opacity: 0.70;
   border-radius: 10px;
+  height: 50px;
+  opacity: 0.70;
+  width: 300px;
 }
 
-
 .input::-webkit-input-placeholder {
-    color:    #000;
+    color: #000;
      opacity: 1 !important;
 }
 
-.suggest-btn {
-  height: 50px;
-  width: 100px;
-  opacity: 0.70;
+.clear-btn {
   background-color: #FFF;
   border-radius: 10px;
+  height: 50px;
+  opacity: 0.70;
+  width: 100px;
 }
 
 .append-sect {
-  height: 350px;
-  width: 300px;
   background-color: #FFF;
+  border-radius: 10px;
+  height: 350px;
+  left: 440px;
+  opacity: 0.70;
   position: absolute;
   top: 60px;
-  left: 440px;
-  border-radius: 10px;
-  opacity: 0.70;
+  width: 300px;
 }
+
 
 ul {
   text-align:justify;
@@ -95,5 +95,6 @@ ul {
 }
 
 ul:hover {
-  background-color: #CC3F35
+  background-color: #CC3F35;
+  cursor: pointer;
 }
